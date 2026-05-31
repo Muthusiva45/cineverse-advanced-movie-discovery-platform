@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiDownload, FiMoon, FiSettings, FiSun } from 'react-icons/fi';
+import BlurReveal from '../components/BlurReveal';
 import PageTitle from '../components/PageTitle';
 import StatCard from '../components/StatCard';
 import { useFavorites } from '../context/FavoritesContext';
@@ -34,13 +35,15 @@ function Settings() {
       exit={{ opacity: 0, y: 12 }}
       initial={{ opacity: 0, y: 12 }}
     >
-      <p className="text-sm font-bold uppercase tracking-[0.24em] text-cinema-red">Control Room</p>
-      <PageTitle>Settings</PageTitle>
-      <p className="mt-4 max-w-2xl text-cinema-muted">
-        Tune the interface, switch the white/dark theme, and download your local CineVerse library.
-      </p>
+      <BlurReveal>
+        <p className="text-sm font-bold uppercase tracking-[0.24em] text-cinema-red">Control Room</p>
+        <PageTitle>Settings</PageTitle>
+        <p className="mt-4 max-w-2xl text-cinema-muted">
+          Tune the interface, switch the white/dark theme, and download your local CineVerse library.
+        </p>
+      </BlurReveal>
 
-      <div className="mt-10 grid gap-4 lg:grid-cols-2">
+      <BlurReveal className="mt-10 grid gap-4 lg:grid-cols-2">
         <section className="glass-panel rounded-lg p-5">
           <div className="flex items-start gap-3">
             <span className="grid h-12 w-12 place-items-center rounded-md bg-cinema-red/15 text-cinema-red">
@@ -84,7 +87,7 @@ function Settings() {
             Download Library
           </button>
         </section>
-      </div>
+      </BlurReveal>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         <StatCard icon={FiDownload} label="Watchlist" value={watchlist.length} helper="Saved movies included in export." />

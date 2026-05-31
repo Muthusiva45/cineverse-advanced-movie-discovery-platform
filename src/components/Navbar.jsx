@@ -74,16 +74,29 @@ function Navbar() {
             : 'bg-gradient-to-b from-black/75 to-transparent'
         }`}
       >
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-          <Link className="brand-mark shrink-0 text-2xl font-black tracking-tight text-white" to="/">
-            Cine<span className="text-cinema-red">Verse</span>
+        <nav className="mx-auto grid h-20 w-full max-w-[1760px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:px-8 xl:px-10">
+          <Link className="brand-mark flex min-w-0 shrink-0 items-center gap-3 text-white" to="/">
+            <span className="grid h-11 w-11 place-items-center rounded-md bg-cinema-red text-xl font-black shadow-glow">
+              CV
+            </span>
+            <span className="hidden leading-tight sm:block">
+              <span className="block whitespace-nowrap text-xl font-black tracking-tight 2xl:text-2xl">
+                Cine<span className="text-cinema-red">Verse</span>
+              </span>
+              <span className="hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.28em] text-cinema-muted 2xl:block">
+                Discover. Save. Compare.
+              </span>
+            </span>
+            <span className="text-2xl font-black tracking-tight sm:hidden">
+              Cine<span className="text-cinema-red">Verse</span>
+            </span>
           </Link>
 
-          <div className="hidden items-center gap-5 md:flex lg:gap-6">
+          <div className="hidden min-w-0 items-center justify-center gap-1 xl:flex 2xl:gap-2">
             {navItems.map((item) => (
               <NavLink
                 className={({ isActive }) =>
-                  `nav-link text-sm font-semibold transition hover:text-white ${
+                  `nav-link whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold transition hover:text-white 2xl:text-sm ${
                     isActive ? 'text-white' : 'text-cinema-muted'
                   }`
                 }
@@ -95,7 +108,7 @@ function Navbar() {
             ))}
           </div>
 
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden min-w-0 shrink-0 items-center gap-2 xl:flex">
             <SearchBar compact onChange={setQuery} onSubmit={submitSearch} value={query} />
             <button
               aria-label="Toggle theme"
@@ -108,7 +121,7 @@ function Navbar() {
             </button>
             <button
               aria-label="Download library"
-              className="nav-action grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-cinema-red hover:text-cinema-red"
+              className="nav-action hidden h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-cinema-red hover:text-cinema-red 2xl:grid"
               onPointerDown={(event) => handlePointerAction(event, exportData)}
               onMouseDown={(event) => handlePointerAction(event, exportData)}
               type="button"
@@ -126,7 +139,7 @@ function Navbar() {
             </button>
             <Link
               aria-label="Favorites"
-              className="nav-action relative grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-cinema-red hover:text-cinema-red"
+              className="nav-action relative hidden h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-cinema-red hover:text-cinema-red 2xl:grid"
               to="/favorites"
             >
               <FiHeart />
@@ -138,7 +151,7 @@ function Navbar() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center justify-end gap-2 xl:hidden">
             <button
               aria-label="Open search"
               className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5"
@@ -159,7 +172,7 @@ function Navbar() {
         </nav>
 
         {open ? (
-          <div className="border-t border-white/10 bg-cinema-black/95 px-4 py-5 backdrop-blur-xl md:hidden">
+          <div className="max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-white/10 bg-cinema-black/95 px-4 py-5 backdrop-blur-xl xl:hidden">
             <div className="mb-4">
               <SearchBar onChange={setQuery} onSubmit={submitSearch} value={query} />
             </div>

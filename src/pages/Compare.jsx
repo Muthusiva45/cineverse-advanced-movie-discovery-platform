@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import BlurReveal from '../components/BlurReveal';
 import CompareSelector from '../components/CompareSelector';
 import PageTitle from '../components/PageTitle';
 import RatingPill from '../components/RatingPill';
@@ -56,16 +57,18 @@ function Compare() {
 
   return (
     <motion.main animate={{ opacity: 1, y: 0 }} className="mx-auto min-h-screen max-w-7xl px-4 pb-24 pt-28 sm:px-6 lg:px-10" exit={{ opacity: 0, y: 12 }} initial={{ opacity: 0, y: 12 }}>
-      <p className="text-sm font-bold uppercase tracking-[0.24em] text-cinema-red">Head To Head</p>
-      <PageTitle>Compare Movies</PageTitle>
-      <p className="mt-4 max-w-2xl text-cinema-muted">Pick two movies and compare ratings, box office, awards, cast, and metadata side by side.</p>
+      <BlurReveal>
+        <p className="text-sm font-bold uppercase tracking-[0.24em] text-cinema-red">Head To Head</p>
+        <PageTitle>Compare Movies</PageTitle>
+        <p className="mt-4 max-w-2xl text-cinema-muted">Pick two movies and compare ratings, box office, awards, cast, and metadata side by side.</p>
+      </BlurReveal>
 
-      <div className="mt-10 grid gap-4 lg:grid-cols-2">
+      <BlurReveal className="mt-10 grid gap-4 lg:grid-cols-2">
         <CompareSelector label="Movie A" onSelect={setLeft} selected={left} />
         <CompareSelector label="Movie B" onSelect={setRight} selected={right} />
-      </div>
+      </BlurReveal>
 
-      <div className="mt-10 overflow-hidden rounded-lg border border-white/10">
+      <BlurReveal className="mt-10 overflow-hidden rounded-lg border border-white/10">
         <div className="grid grid-cols-[9rem_1fr_1fr] bg-white/[0.06] text-sm font-black uppercase tracking-[0.16em] text-cinema-muted">
           <div className="p-4">Metric</div>
           <div className="p-4">{left?.Title || 'Movie A'}</div>
@@ -78,7 +81,7 @@ function Compare() {
             <div className={`border-l border-white/10 p-4 text-zinc-100 ${rightClass}`}>{rightValue || 'N/A'}</div>
           </div>
         ))}
-      </div>
+      </BlurReveal>
 
       {left || right ? (
         <div className="mt-6 flex flex-wrap gap-2">

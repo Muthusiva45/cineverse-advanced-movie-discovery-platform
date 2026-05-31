@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getMovieDetails, getMoviesByKeyword } from '../api/omdb';
+import BlurReveal from '../components/BlurReveal';
 import Hero from '../components/Hero';
 import MovieCard from '../components/MovieCard';
 import MovieRow from '../components/MovieRow';
@@ -16,22 +17,23 @@ function PreviewSection({ title, items, to, empty }) {
   if (!items.length) return null;
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-10">
-      <div className="mb-4 flex items-center justify-between gap-4">
+    <BlurReveal as="section" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-10">
+      <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-extrabold md:text-2xl">{title}</h2>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-cinema-red">Personal shelf</p>
+          <h2 className="mt-1 text-2xl font-black md:text-3xl">{title}</h2>
           <p className="mt-1 text-sm text-cinema-muted">{empty}</p>
         </div>
         <Link className="text-sm font-bold text-cinema-red hover:text-white" to={to}>
           View all
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6">
-        {items.slice(0, 6).map((movie) => (
-          <MovieCard key={movie.imdbID} movie={movie} />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6">
+        {items.slice(0, 6).map((movie, index) => (
+          <MovieCard key={movie.imdbID} movie={movie} revealDelay={index * 0.05} />
         ))}
       </div>
-    </section>
+    </BlurReveal>
   );
 }
 
@@ -76,8 +78,8 @@ function Home() {
         <Hero movie={heroMovie} />
       )}
 
-      <section className="mx-auto -mt-8 grid max-w-7xl gap-4 px-4 pb-8 sm:px-6 md:-mt-16 md:grid-cols-3 lg:px-10">
-        <StatCard icon={FiClock} label="Recently Viewed" value={recentlyViewed.length} helper="Continue exploring where you left off." />
+      <section className="mx-auto -mt-10 grid max-w-7xl gap-5 px-4 pb-10 sm:px-6 md:-mt-20 md:grid-cols-3 lg:px-10">
+        <StatCard accent icon={FiClock} label="Recently Viewed" value={recentlyViewed.length} helper="Continue exploring where you left off." />
         <StatCard icon={FiPlayCircle} label="Watchlist" value={watchlist.length} helper="Movies queued for later discovery." />
         <StatCard icon={FiHeart} label="Favorites" value={favorites.length} helper="Your personal hall of fame." />
       </section>

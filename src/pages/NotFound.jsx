@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import BlurReveal from '../components/BlurReveal';
 import PageTitle from '../components/PageTitle';
 
 function NotFound() {
@@ -10,7 +11,7 @@ function NotFound() {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <div>
+      <BlurReveal>
         <p className="text-sm font-bold uppercase tracking-[0.28em] text-cinema-red">404</p>
         <PageTitle>Scene not found</PageTitle>
         <p className="mt-4 max-w-lg text-cinema-muted">
@@ -22,7 +23,7 @@ function NotFound() {
         >
           Back Home
         </Link>
-      </div>
+      </BlurReveal>
     </motion.main>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { blurReveal, blurStagger } from './BlurReveal';
 import MovieCard from './MovieCard';
 import SkeletonCard from './SkeletonCard';
 
@@ -52,14 +53,17 @@ function MovieRow({ title, fetcher }) {
 
   return (
     <motion.section
-      className="group/row px-4 py-7 sm:px-6 lg:px-10"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55 }}
-      viewport={{ once: true, margin: '-80px' }}
+      className="group/row px-4 py-10 sm:px-6 lg:px-10"
+      initial="hidden"
+      variants={blurReveal}
+      viewport={{ once: true, amount: 0.2, margin: '-80px' }}
+      whileInView="visible"
     >
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-extrabold md:text-2xl">{title}</h2>
+      <div className="mb-5 flex items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-cinema-red">Curated row</p>
+          <h2 className="mt-1 text-2xl font-black md:text-3xl">{title}</h2>
+        </div>
         <div className="hidden gap-2 md:flex">
           <button
             aria-label={`Scroll ${title} left`}
@@ -80,14 +84,16 @@ function MovieRow({ title, fetcher }) {
         </div>
       </div>
       <div
-        className="no-scrollbar grid auto-cols-[38%] grid-flow-col gap-3 overflow-x-auto scroll-smooth pb-4 sm:auto-cols-[24%] md:auto-cols-[18%] lg:auto-cols-[14%] 2xl:auto-cols-[11%]"
+        className="no-scrollbar grid auto-cols-[58%] grid-flow-col gap-4 overflow-x-auto scroll-smooth pb-6 sm:auto-cols-[34%] md:auto-cols-[24%] lg:auto-cols-[18%] xl:auto-cols-[15%] 2xl:auto-cols-[13%]"
         ref={rowRef}
       >
-        {!loading && movies.length
-          ? movies.map((movie) => <MovieCard key={movie.imdbID} movie={movie} />)
-          : Array.from({ length: 8 }).map((_, index) => (
-              <SkeletonCard key={index} />
-            ))}
+        <motion.div className="contents" initial="hidden" variants={blurStagger} viewport={{ once: true }} whileInView="visible">
+          {!loading && movies.length
+            ? movies.map((movie, index) => <MovieCard key={movie.imdbID} movie={movie} revealDelay={index * 0.045} />)
+            : Array.from({ length: 8 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))}
+        </motion.div>
       </div>
     </motion.section>
   );

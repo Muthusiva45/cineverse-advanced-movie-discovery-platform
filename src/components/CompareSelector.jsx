@@ -68,7 +68,7 @@ function CompareSelector({ label, selected, onSelect }) {
       {selected ? (
         <div className="mt-4 rounded-md border border-white/10 bg-white/[0.04] p-3">
           <p className="font-black">{selected.Title}</p>
-          <p className="mt-1 text-sm text-cinema-muted">{selected.Year} • IMDb {selected.imdbRating || 'N/A'}</p>
+          <p className="mt-1 text-sm text-cinema-muted">{selected.Year} | IMDb {selected.imdbRating || 'N/A'}</p>
         </div>
       ) : null}
       {loading ? <Loader label="Searching..." /> : null}

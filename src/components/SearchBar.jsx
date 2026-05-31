@@ -3,8 +3,8 @@ import { FiSearch, FiX } from 'react-icons/fi';
 function SearchBar({ value, onChange, onSubmit, placeholder = 'Search movies...', compact = false }) {
   return (
     <form
-      className={`flex items-center gap-2 rounded-full border border-white/10 bg-black/45 px-4 text-white shadow-cinematic backdrop-blur-xl transition focus-within:border-cinema-red ${
-        compact ? 'h-10 w-full md:w-72' : 'h-12 w-full'
+      className={`flex min-w-0 items-center gap-2 rounded-full border border-white/10 bg-black/45 px-4 text-white shadow-cinematic backdrop-blur-xl transition focus-within:border-cinema-red ${
+        compact ? 'h-10 w-[clamp(11rem,16vw,18rem)]' : 'h-12 w-full'
       }`}
       onSubmit={onSubmit}
     >
